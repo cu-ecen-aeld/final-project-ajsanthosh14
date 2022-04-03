@@ -1,5 +1,5 @@
 #!/bin/bash
-#Script to build receiver/client gstreamer udp reverse pipeline
+#Script to build receiver/client gstreamer udp unicast reverse pipeline
 #Author: Santhosh
 
 #Reference: gstreamer documentation

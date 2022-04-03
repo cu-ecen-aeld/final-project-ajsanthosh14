@@ -1,5 +1,5 @@
 #!/bin/bash
-#Script to build transmitter/server gstreamer udp pipeline
+#Script to build transmitter/server gstreamer udp unicast pipeline
 #Author: Santhosh
 
 #Reference: gstreamer documentation
@@ -17,24 +17,24 @@ VSRC=video_samples/sample.mp4
 
 #Broadcasting only video portion of MPEG video file
 
-: '
+
 IP=$(ip route get 8.8.8.8 | grep -oP 'src \K[^ ]+')
 
 echo BRADCASTING IP IP address: $IP
 
 gst-launch-1.0 -v filesrc location=$VSRC  ! decodebin ! x264enc ! rtph264pay ! udpsink host=$IP port=5000 
- '
+
 
 # Audio+Video broadcasting over UDP
-
+: '
 TARGET_IP=10.0.0.83
 
-echo BRADCASTING IP IP address: $TARGET_IP
+echo BRADCASTING IP address: $TARGET_IP
 
 
 gst-launch-1.0 -v filesrc location=$VSRC ! \
        	decodebin name=dec ! videoconvert ! x264enc ! video/x-h264 ! mpegtsmux name=mux ! queue ! udpsink host=$TARGET_IP port=5000 sync=true \
        	dec. ! queue ! audioconvert ! voaacenc ! audio/mpeg ! queue ! mux.
-
+'
 
 
