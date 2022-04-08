@@ -7,7 +7,7 @@
 
 
 #Video source
-VSRC=video_samples/sample.mp4
+VSRC=../../video_samples/sample.mp4
 
 
 # Get public ip 
@@ -17,11 +17,15 @@ VSRC=video_samples/sample.mp4
 
 #Broadcasting only video portion of MPEG video file
 
-IP=$(ip route get 8.8.8.8 | grep -oP 'src \K[^ ]+')
+#TARGET_IP=$(ip route get 8.8.8.8 | grep -oP 'src \K[^ ]+')
+TARGET_IP=10.0.0.83
 PORT=5000
 
 echo STREAMING TO IP address: $IP
 
-gst-launch-1.0 -v filesrc location=$VSRC  ! \
-       	decodebin ! x264enc ! rtph264pay ! udpsink host=$IP port=$PORT
+#gst-launch-1.0 -v videotestsrc  ! \
+#       	decodebin ! x264enc ! rtph264pay ! udpsink host=$IP port=$PORT
 
+
+gst-launch-1.0 -v filesrc location=$VSRC ! \
+        decodebin ! videoconvert ! x264enc ! video/x-h264 ! udpsink host=$TARGET_IP port=$PORT 
