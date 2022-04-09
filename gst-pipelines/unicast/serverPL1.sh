@@ -28,4 +28,4 @@ echo STREAMING TO IP address: $IP
 
 
 gst-launch-1.0 -v filesrc location=$VSRC ! \
-        decodebin ! videoconvert ! x264enc ! video/x-h264 ! udpsink host=$TARGET_IP port=$PORT 
+        decodebin ! videoconvert ! x264enc ! video/x-h264 ! rtph264pay ! udpsink host=$TARGET_IP port=$PORT 
