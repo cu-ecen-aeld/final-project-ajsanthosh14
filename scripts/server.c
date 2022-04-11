@@ -8,7 +8,7 @@
  *
  * @author Santhosh, santhosh@colorado.edu
  * @created on April 7, 2022
- *
+ * Ref: https://gstreamer.freedesktop.org/documentation/
  ************************************************************************************************/
  
  #include <gst/gst.h>
