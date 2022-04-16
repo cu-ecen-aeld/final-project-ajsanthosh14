@@ -7,7 +7,7 @@
 
 
 #Video source
-VSRC=sample.mp4
+VSRC=/home/sample.mp4
 
 # Audio+Video broadcasting over UDP
 
