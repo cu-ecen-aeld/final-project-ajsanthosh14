@@ -1,5 +1,6 @@
 #!/bin/bash
 #Script to build transmitter/server gstreamer udp unicast pipeline
+#Usage: server1 <TARGET_IP>
 #Author: Santhosh
 
 #Reference: gstreamer documentation
@@ -18,7 +19,7 @@ VSRC=/home/sample.mp4
 #Broadcasting only video portion of MPEG video file
 
 #TARGET_IP=$(ip route get 8.8.8.8 | grep -oP 'src \K[^ ]+')
-TARGET_IP=10.0.0.83
+TARGET_IP=$1
 PORT=5000
 
 echo STREAMING TO IP address: $TARGET_IP
