@@ -4,21 +4,23 @@
  * 
  * @file server.c
  * @description Application to stream a locally stored video over udp using GStreamer 
- * @usage .server
+ * @usage ./server <TARGET_IP>
  *
  * @author Santhosh, santhosh@colorado.edu
  * @created on April 7, 2022
  * Ref: https://gstreamer.freedesktop.org/documentation/
  ************************************************************************************************/
  
- #include <gst/gst.h>
- 
- static GMainLoop *loop;
+#include <gst/gst.h>
+#include <stdio.h>
+
+static GMainLoop *loop;
 
 gint
 main (gint   argc,
       gchar *argv[])
 {
+       	
     GstElement *pipeline, *videosrc, *conv,*enc, *pay, *udp;
     GstStateChangeReturn ret;
 
@@ -35,7 +37,7 @@ main (gint   argc,
     enc = gst_element_factory_make("x264enc", "enc");
     pay = gst_element_factory_make("rtph264pay", "pay");
     udp = gst_element_factory_make("udpsink", "udp");
-    g_object_set(G_OBJECT(udp), "host", "10.0.0.83", NULL);
+    g_object_set(G_OBJECT(udp), "host", argv[1], NULL);
     g_object_set(G_OBJECT(udp), "port", 5000, NULL);
 
 
