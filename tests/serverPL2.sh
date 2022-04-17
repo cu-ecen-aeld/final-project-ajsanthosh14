@@ -1,5 +1,6 @@
 #!/bin/bash
 #Script to build transmitter/server gstreamer udp unicast pipeline
+#Usage: server2 <TARGET_IP>
 #Author: Santhosh
 
 #Reference: gstreamer documentation
@@ -12,7 +13,7 @@ VSRC=/home/sample.mp4
 # Audio+Video broadcasting over UDP
 
 #TARGET_IP=$(ip route get 8.8.8.8 | grep -oP 'src \K[^ ]+')
-TARGET_IP=10.0.0.83
+TARGET_IP=$1
 PORT=5000
 
 
